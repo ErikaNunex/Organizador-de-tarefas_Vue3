@@ -1,15 +1,19 @@
 <template>
-  <main class="columns is-gapless is-multiline">
+  <main
+    class="columns is-gapless is-multiline"
+    :class="{ 'modo-escuro': modoEscuro }"
+  >
     <div class="column is-one-quarter">
-      <BarraLateral />
+      <BarraLateral @aoAlterarTema="trocarTema" />
     </div>
-    <div class="column is-three-quarters">
+    <div class="column is-three-quarters conteudo">
       <Formulario @aoSalvarTarefa="salvarTarefa" />
       <div v-if="tarefas.length" class="lista">
         <Tarefas v-for="(tarefa, i) in tarefas" :key="i" :tarefa="tarefa" />
       </div>
-      <div v-else>
-        <h1>Você não realizou nenhuma tarefaz hoje</h1>
+      <div v-else class="defaultTarefa">
+        <!-- <i class="fa-solid fa-file-circle-plus fa-10x"></i> -->
+        <span>Você ainda não tem nenhuma tarefa</span>
       </div>
     </div>
   </main>
@@ -32,14 +36,35 @@ export default defineComponent({
   data() {
     return {
       tarefas: [] as ITarefas[],
+      modoEscuro: false,
     };
   },
   methods: {
     salvarTarefa(tarefa: ITarefas) {
       this.tarefas.push(tarefa);
     },
+    trocarTema(modoEscuro: boolean) {
+      this.modoEscuro = modoEscuro;
+    },
   },
 });
 </script>
-
-<style></style>
+<style>
+.lista {
+  padding: 1.25rem;
+}
+main {
+  --bg-primario: #fff;
+  --texto-primario: #000;
+}
+main.modo-escuro {
+  --bg-primario: #2b2d42;
+  --texto-primario: #ddd;
+}
+.conteudo {
+  background-color: var(--bg-primario);
+}
+.defaultTarefa {
+  display: flex;
+}
+</style>
