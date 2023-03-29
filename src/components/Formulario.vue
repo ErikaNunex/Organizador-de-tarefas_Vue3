@@ -37,12 +37,14 @@ export default defineComponent({
   },
   methods: {
     finalizarTarefa(tempoDecorrido: number): void {
-      this.$emit("aoSalvarTarefa", {
+      const dadosAtividade = {
         duracaoEmSegundos: tempoDecorrido,
         descricao: this.descricao,
-      });
+      };
+      this.$emit("aoSalvarTarefa", dadosAtividade);
       this.descricao = "";
     },
+    
   },
 });
 </script>

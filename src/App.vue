@@ -3,13 +3,13 @@
     class="columns is-gapless is-multiline"
     :class="{ 'modo-escuro': modoEscuro }"
   >
-    <div class="column is-one-quarter">
+    <div class="column is-one-fifth">
       <BarraLateral @aoAlterarTema="trocarTema" />
     </div>
-    <div class="column is-three-quarters conteudo">
+    <div class="column is-four-fifths conteudo">
       <Formulario @aoSalvarTarefa="salvarTarefa" />
       <div v-if="tarefas.length" class="lista">
-        <Tarefas v-for="(tarefa, i) in tarefas" :key="i" :tarefa="tarefa" />
+        <Tarefas v-for="(tarefa, i) in tarefas" :key="i" :tarefa="tarefa"  @ao-deletar="excluirTarefa"/>
       </div>
       <div v-else class="defaultTarefa">
         <!-- <i class="fa-solid fa-file-circle-plus fa-10x"></i> -->
@@ -37,15 +37,38 @@ export default defineComponent({
     return {
       tarefas: [] as ITarefas[],
       modoEscuro: false,
+      API_URL: 'http://localhost:3000',
     };
   },
   methods: {
     salvarTarefa(tarefa: ITarefas) {
-      this.tarefas.push(tarefa);
+     this.addNovaTarefa(tarefa)
     },
     trocarTema(modoEscuro: boolean) {
       this.modoEscuro = modoEscuro;
     },
+    addNovaTarefa(tarefa: ITarefas){
+      fetch(this.API_URL + '/tarefas', {
+       method: 'POST',
+       body:JSON.stringify(tarefa),
+       headers: {
+        'Content-Type': 'application/json'
+       }
+    })
+    .then(response => response.json())
+    .then(response => this.atualizarTarefasLista())
+    },
+    atualizarTarefasLista(){
+      fetch(this.API_URL + '/tarefas')
+        .then(response => response.json())
+        .then((listaTarefa)=>this.tarefas = listaTarefa)
+    },
+   async excluirTarefa(id: number){
+      await fetch(this.API_URL+'/tarefas/'+id,{
+         method:'DELETE'
+     });
+     this.atualizarTarefasLista()
+    }
   },
 });
 </script>
@@ -58,7 +81,7 @@ main {
   --texto-primario: #000;
 }
 main.modo-escuro {
-  --bg-primario: #2b2d42;
+  --bg-primario: #012030;
   --texto-primario: #ddd;
 }
 .conteudo {

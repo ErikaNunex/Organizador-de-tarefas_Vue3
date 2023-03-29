@@ -1,4 +1,5 @@
-export default interface ITarefa{
+export default interface ITarefa {
+    id: number,
     duracaoEmSegundos: number,
-    descricao:string
+    descricao: string
 }

@@ -3,7 +3,12 @@
     <h1>
       <img src="../assets/logo.png" alt="" />
     </h1>
-    <button @click="alterarTema" class="button">{{ textoBotao }}</button>
+    <i
+      @click="alterarTema"
+      class="fa-solid fa-3x"
+      :class="classToggle"
+      style="color: #dbefbe"
+    ></i>
   </header>
 </template>
 <script lang="ts">
@@ -18,8 +23,8 @@ export default defineComponent({
     };
   },
   computed: {
-    textoBotao() {
-      return this.modoEscuro ? "Desativar modo escuro" : "ativar modo escuro";
+    classToggle() {
+      return this.modoEscuro ? "fa-toggle-on" : "fa-toggle-off";
     },
   },
   methods: {
@@ -33,7 +38,7 @@ export default defineComponent({
 <style>
 header {
   padding: 1rem;
-  background-color: #0d3b66;
+  background-color: #1d7373;
   width: 100%;
   height: 100vh;
   text-align: center;
