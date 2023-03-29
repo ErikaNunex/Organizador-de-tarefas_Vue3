@@ -38,7 +38,7 @@ export default defineComponent({
 <style>
 header {
   padding: 1rem;
-  background-color: #1d7373;
+  background-color: #0A3A40;
   width: 100%;
   height: 100vh;
   text-align: center;

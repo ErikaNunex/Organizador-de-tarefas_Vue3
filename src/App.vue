@@ -13,7 +13,7 @@
       </div>
       <div v-else class="column " >
         <div class="column is-half is-offset-one-quarter mt-6" >
-          <img class="img" src="./img/default.svg" alt="">
+          <img class="img" src="./assets/default.svg" alt="">
         </div>
         <div class="column is-half is-offset-one-quarter">
           <span class="texto-default">Organize suas atividades do dia-dia</span>
