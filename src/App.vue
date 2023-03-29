@@ -11,9 +11,13 @@
       <div v-if="tarefas.length" class="lista">
         <Tarefas v-for="(tarefa, i) in tarefas" :key="i" :tarefa="tarefa"  @ao-deletar="excluirTarefa"/>
       </div>
-      <div v-else class="defaultTarefa">
-        <!-- <i class="fa-solid fa-file-circle-plus fa-10x"></i> -->
-        <span>Você ainda não tem nenhuma tarefa</span>
+      <div v-else class="column " >
+        <div class="column is-half is-offset-one-quarter mt-6" >
+          <img class="img" src="./img/default.svg" alt="">
+        </div>
+        <div class="column is-half is-offset-one-quarter">
+          <span class="texto-default">Organize suas atividades do dia-dia</span>
+        </div>
       </div>
     </div>
   </main>
@@ -39,6 +43,9 @@ export default defineComponent({
       modoEscuro: false,
       API_URL: 'http://localhost:3000',
     };
+  },
+  mounted(){
+    this.atualizarTarefasLista()
   },
   methods: {
     salvarTarefa(tarefa: ITarefas) {
@@ -87,7 +94,10 @@ main.modo-escuro {
 .conteudo {
   background-color: var(--bg-primario);
 }
-.defaultTarefa {
-  display: flex;
+.img{
+  width: 500px; 
+}
+.texto-default{
+  color: var(--texto-primario);
 }
 </style>
