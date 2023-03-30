@@ -22,23 +22,23 @@ export default defineComponent({
   components: {
     Cronometro,
   },
-  emits:['aoDeletar'],
+  emits: ["aoDeletar"],
   props: {
     tarefa: {
       type: Object as PropType<ITarefa>,
       required: true,
     },
   },
-  data(){
-    return{
-      API_URL: 'http://localhost:3000',
-    }
+  data() {
+    return {
+      API_URL: "http://localhost:3000",
+    };
   },
-  methods:{
-    excluirTarefa(){
-      this.$emit('aoDeletar', this.tarefa.id)
-    }
-  }
+  methods: {
+    excluirTarefa() {
+      this.$emit("aoDeletar", this.tarefa.id);
+    },
+  },
 });
 </script>
 <style scoped>
