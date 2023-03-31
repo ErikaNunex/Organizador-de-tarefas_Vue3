@@ -7,9 +7,6 @@
       <div class="column is-3">
         <Cronometro :tempoEmSegundos="tarefa.duracaoEmSegundos" />
       </div>
-      <div class="column is-3">
-        <button @click="excluirTarefa" class="delete is-large"></button>
-      </div>
     </div>
   </div>
 </template>
@@ -22,21 +19,10 @@ export default defineComponent({
   components: {
     Cronometro,
   },
-  emits: ["aoDeletar"],
   props: {
     tarefa: {
       type: Object as PropType<ITarefa>,
       required: true,
-    },
-  },
-  data() {
-    return {
-      API_URL: "http://localhost:3000",
-    };
-  },
-  methods: {
-    excluirTarefa() {
-      this.$emit("aoDeletar", this.tarefa.id);
     },
   },
 });

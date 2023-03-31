@@ -8,12 +8,7 @@
     </div>
     <div class="column is-four-fifths conteudo">
       <div v-if="tarefas.length" class="lista">
-        <Tarefas
-          v-for="(tarefa, i) in tarefas"
-          :key="i"
-          :tarefa="tarefa"
-          @ao-deletar="excluirTarefa"
-        />
+        <Tarefas v-for="(tarefa, i) in tarefas" :key="i" :tarefa="tarefa" />
       </div>
       <div v-else class="column">
         <div class="column is-half is-offset-one-quarter mt-6">
@@ -45,40 +40,14 @@ export default defineComponent({
     return {
       tarefas: [] as ITarefas[],
       modoEscuro: false,
-      API_URL: "http://localhost:3000",
     };
-  },
-  mounted() {
-    this.atualizarTarefasLista();
   },
   methods: {
     salvarTarefa(tarefa: ITarefas) {
-      this.addNovaTarefa(tarefa);
+      this.tarefas.push(tarefa);
     },
     trocarTema(modoEscuro: boolean) {
       this.modoEscuro = modoEscuro;
-    },
-    addNovaTarefa(tarefa: ITarefas) {
-      fetch(this.API_URL + "/tarefas", {
-        method: "POST",
-        body: JSON.stringify(tarefa),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((response) => this.atualizarTarefasLista());
-    },
-    atualizarTarefasLista() {
-      fetch(this.API_URL + "/tarefas")
-        .then((response) => response.json())
-        .then((listaTarefa) => (this.tarefas = listaTarefa));
-    },
-    async excluirTarefa(id: number) {
-      await fetch(this.API_URL + "/tarefas/" + id, {
-        method: "DELETE",
-      });
-      this.atualizarTarefasLista();
     },
   },
 });
