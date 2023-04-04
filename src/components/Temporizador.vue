@@ -1,5 +1,5 @@
 <template>
-  <div class="is-flex is-align-items-center is-justify-content-space-between">
+  <div class="is-flex is-align-items-center is-justify-content-space-around">
     <Cronometro :tempo-em-segundos="tempoEmSegundos" />
     <button class="button" @click="iniciar()" :disabled="cronometroRodando">
       <span class="icon">
@@ -49,7 +49,7 @@ export default defineComponent({
       clearInterval(this.cronometro);
     },
     finalizar() {
-      this.pausar()
+      this.pausar();
       this.$emit("aoTemporizadorFinalizado", this.tempoEmSegundos);
       this.tempoEmSegundos = 0;
     },

@@ -3,12 +3,28 @@
     <h1>
       <img src="../assets/logo.png" alt="" />
     </h1>
-    <i
-      @click="alterarTema"
-      class="fa-solid fa-3x"
-      :class="classToggle"
-      style="color: #dbefbe"
-    ></i>
+    <div class="has-text-centered">
+      <i
+        @click="alterarTema"
+        class="fa-solid fa-3x"
+        :class="classToggle"
+        style="color: #dbefbe"
+      ></i>
+    </div>
+    <nav class="panel mt-5">
+      <ul>
+        <li>
+          <router-link to="/" class="link">
+            <i class="fa fa-tasks"> tarefas </i>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/projetos" class="link">
+            <i class="fa fa-project-diagram"> projetos </i>
+          </router-link>
+        </li>
+      </ul>
+    </nav>
   </header>
 </template>
 <script lang="ts">
@@ -35,18 +51,34 @@ export default defineComponent({
   },
 });
 </script>
-<style>
+<style scoped>
+h1 {
+  text-align: center;
+}
+strong {
+  color: #f95738;
+}
 header {
-  padding: 1rem;
-  background-color: #0a3a40;
+  background: #0a3a40;
   width: 100%;
   height: 100vh;
-  text-align: center;
+  padding: 2rem;
 }
 @media only screen and (max-width: 768px) {
   header {
-    padding: 2.5rem;
     height: auto;
   }
+}
+.panel li {
+  margin: 8px 0;
+}
+.link {
+  color: #fff;
+}
+.link:hover {
+  color: #faf0ca;
+}
+.link.router-link-active {
+  color: #faf0ca;
 }
 </style>
