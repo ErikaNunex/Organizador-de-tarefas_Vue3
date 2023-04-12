@@ -7,6 +7,7 @@
       <BarraLateral @aoAlterarTema="trocarTema" />
     </div>
     <div class="column is-four-fifths conteudo">
+      <Notificacoes />
       <router-view></router-view>
     </div>
   </main>
@@ -16,11 +17,13 @@
 import { defineComponent } from "vue";
 import BarraLateral from "@/components/BarraLateral.vue";
 import ITarefas from "./interfaces/ITarefas";
+import Notificacoes from "@/components/Notificacoes.vue";
 
 export default defineComponent({
   name: "App",
   components: {
     BarraLateral,
+    Notificacoes,
   },
   data() {
     return {
