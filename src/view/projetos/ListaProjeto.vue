@@ -42,19 +42,28 @@
 import { defineComponent, computed } from "vue";
 import { useStore } from "@/store";
 import { EXCLUIR_PROJETO } from "@/store/Mutations";
+import useNotificador from "@/hooks/notificador";
+import { TipoNotificacao } from "@/interfaces/INotificacao";
 
 export default defineComponent({
   name: "ListaView",
   methods: {
     excluirProjeto(id: string) {
       this.store.commit(EXCLUIR_PROJETO, id);
+      this.notificar(
+        TipoNotificacao.FALHA,
+        "Projeto excluido",
+        "Um projeto foi removido da listagem de projetos"
+      );
     },
   },
   setup() {
     const store = useStore();
+    const { notificar } = useNotificador();
     return {
       projetos: computed(() => store.state.projetos),
       store,
+      notificar,
     };
   },
 });
