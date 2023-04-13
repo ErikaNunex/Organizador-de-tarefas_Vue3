@@ -6,6 +6,9 @@ comandos:
 iniciar projeto:
 "npm install"
 
+-- Caso queira armazenar as tarefas consumindo um simulador de API (json-serve)---
+mude de branch:
+git checkout vue-avancado
 instalar o json-server:
 "npm install -g json-server"
 
